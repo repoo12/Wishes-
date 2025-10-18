@@ -1,0 +1,402 @@
+<script type="text/javascript">
+	atOptions = {
+		'key' : '1c3518555110883c46ac42676014ce93',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/1c3518555110883c46ac42676014ce93/invoke.js"></script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Diwali! ✨</title>
+    <!-- Font Awesome (for social media icons) - Using a simple CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: white; /* Theme: white */
+            text-align: center;
+            overflow: hidden; 
+            position: relative;
+        }
+
+        /* Diya Background Effect: z-index: 10 (Foreground) */
+        body::before, body::after {
+            content: '🪔'; 
+            position: fixed;
+            font-size: 80px;
+            color: #FFC300;
+            z-index: 10; /* Diya is behind the text but above fireworks */
+            opacity: 0.3; 
+            animation: diyaGlow 4s infinite alternate;
+        }
+
+        body::before {
+            top: 10%;
+            left: 5%;
+            transform: rotate(-10deg);
+        }
+
+        body::after {
+            bottom: 10%;
+            right: 5%;
+            transform: rotate(15deg);
+        }
+
+        @keyframes diyaGlow {
+            from { text-shadow: 0 0 10px #FFD700; }
+            to { text-shadow: 0 0 20px #FFD700, 0 0 30px #FF8C00; }
+        }
+
+        /* Content Container - z-index: 15 (Highest) */
+        .container {
+            z-index: 15; /* Text and buttons are on the TOP (Foreground) */
+            padding: 20px;
+            max-width: 90%;
+            background: rgba(255, 255, 255, 0.95); 
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            position: relative; 
+        }
+
+        /* Fireworks Canvas Styling: z-index: 5 (Far Background) */
+        #fireworksCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; 
+            z-index: 5; /* Far background */
+        }
+        
+        /* --- Baki CSS Styles same hain --- */
+
+        .main-title {
+            font-size: clamp(3em, 8vw, 6em); 
+            font-weight: 900; 
+            color: #FF4500; 
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            text-shadow: 0 0 15px rgba(255, 140, 0, 0.7), 0 0 30px rgba(255, 140, 0, 0.4); 
+            animation: pulse 2s infinite alternate; 
+        }
+
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        .greeting {
+            font-size: clamp(1.2em, 4vw, 1.8em);
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 40px;
+            line-height: 1.5;
+            font-weight: bold;
+        }
+
+        .share-component {
+            margin-top: 20px;
+        }
+
+        .share-button-main {
+            display: inline-flex;
+            align-items: center;
+            background-color: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: 2px solid #ccc;
+        }
+
+        .share-button-main:hover {
+            background-color: #e0e0e0;
+        }
+
+        .share-icon {
+            font-size: 1.5em;
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        /* ONLY 22k */
+        .share-count {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .social-links {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .social-link {
+            font-size: 2em;
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-link:hover {
+            transform: scale(1.1);
+        }
+
+        /* Specific Social Media Colors */
+        .facebook { background-color: #3b5998; }
+        .whatsapp { background-color: #25d366; }
+        .instagram { background-color: #E1306C; }
+    </style>
+</head>
+<body>
+
+    <!-- Fireworks Canvas (Will be filled by JavaScript) -->
+    <canvas id="fireworksCanvas"></canvas>
+
+    <div class="container">
+        <h1 class="main-title">happy diwali</h1>
+        <p class="greeting">✨तिमी र तिम्रो परिवारलाई दीपावलीको धेरै धेरै शुभकामना!✨</p>
+
+        <!-- Share Component -->
+        <div class="share-component">
+            <div class="share-button-main">
+                <span class="share-icon">
+                    <i class="fas fa-share-alt"></i> <!-- Share Icon Logo -->
+                </span>
+                <!-- ONLY 22k -->
+                <span class="share-count">22k</span> 
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="social-links">
+                <a href="#" id="share-facebook" class="social-link facebook" title="Share on Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" id="share-whatsapp" class="social-link whatsapp" title="Share on WhatsApp">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <!-- Instagram/Native Share: Icon changed back to Instagram -->
+                <a href="#" id="share-instagram" class="social-link instagram" title="Share via Native Apps (Instagram, Twitter, etc.)">
+                    <i class="fab fa-instagram"></i> 
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /* JavaScript Functionality */
+        
+        // Content for Sharing
+        const SHARE_TITLE = 'Happy Diwali! ✨';
+        const SHARE_TEXT = '✨तिमी र तिम्रो परिवारलाई दीपावलीको धेरे धेरे शुभकामना!✨';
+        const SHARE_URL = window.location.href; 
+        
+        // Helper function for copy to clipboard
+        function copyToClipboard(text) {
+             // Create a temporary textarea element
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed"; 
+            textArea.style.opacity = 0; // Hide the textarea
+            document.body.appendChild(textArea);
+            
+            // Select the content
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                // Execute copy command
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                return true;
+            } catch (err) {
+                document.body.removeChild(textArea);
+                return false;
+            }
+        }
+
+        // 1. Social Media Share Links Implementation (These use simple URL redirects and are reliable)
+
+        document.getElementById('share-facebook').addEventListener('click', (e) => {
+            e.preventDefault();
+            const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SHARE_URL)}`;
+            window.open(facebookUrl, '_blank', 'width=600,height=400');
+        });
+
+        document.getElementById('share-whatsapp').addEventListener('click', (e) => {
+            e.preventDefault();
+            const whatsappText = `${SHARE_TEXT} - ${SHARE_URL}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappText)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // INSTAGRAM / NATIVE SHARE - IMPROVED WORKABILITY
+        document.getElementById('share-instagram').addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            const shareData = {
+                title: SHARE_TITLE,
+                text: SHARE_TEXT,
+                url: SHARE_URL 
+            };
+            
+            const fallbackMessage = `${SHARE_TITLE}\n${SHARE_TEXT}\n\nLink: ${SHARE_URL}`;
+
+
+            if (navigator.share) {
+                // Attempt to use native Web Share API
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    // If native share fails or cancelled, try copy to clipboard
+                    if (copyToClipboard(fallbackMessage)) {
+                         alert('Native Share/Instagram failed. Message and link copied to clipboard! Paste it into Instagram or any other app.');
+                    } else {
+                         alert('Native Share failed. Please manually copy this link: ' + SHARE_URL);
+                    }
+                }
+            } else {
+                // Fallback for non-supporting browsers
+                if (copyToClipboard(fallbackMessage)) {
+                     alert('Native Share not supported here. Message and link copied to clipboard! Paste it into Instagram or any other app.');
+                } else {
+                     alert('Native Share not supported. Please manually copy this link: ' + SHARE_URL);
+                }
+            }
+        });
+
+
+        // 2. Simple Fireworks Effect (Canvas-based) - 4X Increase
+        const canvas = document.getElementById('fireworksCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let running = true;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Particle Class (A simple structure for a firework spark)
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.color = color;
+                this.radius = Math.random() * 2 + 1;
+                this.velocity = {
+                    x: (Math.random() - 0.5) * (Math.random() * 8), 
+                    y: (Math.random() - 0.5) * (Math.random() * 8)
+                };
+                this.alpha = 1;
+                this.friction = 0.98;
+                this.gravity = 0.08;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.beginPath();
+                // Fix for arc drawing: use this.radius
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false); 
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.restore();
+            }
+
+            update() {
+                this.velocity.x *= this.friction;
+                this.velocity.y *= this.friction;
+                this.velocity.y += this.gravity;
+                this.x += this.velocity.x;
+                this.y += this.velocity.y;
+                this.alpha -= 0.015; 
+                this.draw();
+            }
+        }
+        
+        // Function to create an explosion (a single firework burst)
+        function createExplosion(x, y, count) {
+            const colors = ['#FFD700', '#FF8C00', '#FF4500', '#FFA07A', '#FFFFFF', '#00FFFF', '#FF00FF'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle(x, y, color));
+            }
+        }
+        
+        // Animation Loop
+        function animate() {
+            if (!running) return;
+            requestAnimationFrame(animate);
+            // Clear canvas with high transparency for a subtle background firework trail
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle, index) => {
+                if (particle.alpha <= 0 || particle.radius < 0.5) {
+                    particles.splice(index, 1);
+                } else {
+                    particle.update();
+                }
+            });
+        }
+
+        // Trigger fireworks on page load
+        function launchFireworks(count, interval) {
+            let explosions = 0;
+            const launchInterval = setInterval(() => {
+                if (explosions >= count) {
+                    clearInterval(launchInterval);
+                    return;
+                }
+                const x = Math.random() * canvas.width;
+                const y = canvas.height * (0.3 + Math.random() * 0.7); 
+                createExplosion(x, y, 70 + Math.floor(Math.random() * 80)); 
+                explosions++;
+            }, interval);
+        }
+
+        // Start the animation loop
+        animate();
+        
+        // Initial fireworks burst: 20 explosions over 300ms intervals (4X effect)
+        launchFireworks(20, 300);
+
+    </script>
+</body>
+    <script type="text/javascript">
+	atOptions = {
+		'key' : '8b79f7c2e9d6f490116306c5ace91e44',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/8b79f7c2e9d6f490116306c5ace91e44/invoke.js"></script>
+</html>
