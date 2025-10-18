@@ -10,6 +10,11 @@
 <script type="text/javascript" src="//www.highperformanceformat.com/1c3518555110883c46ac42676014ce93/invoke.js"></script><!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Ad Code Location 1: HEAD (Often preferred for better ad loading) -->
+    <!-- REPLACE THIS WITH YOUR AD NETWORK'S CODE (Example: Google AdSense/Ad Network Script) -->
+    <script async src="YOUR_AD_NETWORK_SCRIPT_URL_HERE"></script>
+    <!-- ---------------------------------------------------------------------------------- -->
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Diwali! ✨</title>
@@ -110,14 +115,15 @@
         .share-component {
             margin-top: 20px;
         }
-
+        
+        /* Added cursor pointer to show it's clickable */
         .share-button-main {
             display: inline-flex;
             align-items: center;
             background-color: #f0f0f0;
             padding: 10px 20px;
             border-radius: 50px;
-            cursor: pointer;
+            cursor: pointer; /* Added for visual cue */
             transition: background-color 0.3s;
             border: 2px solid #ccc;
         }
@@ -132,7 +138,6 @@
             margin-right: 10px;
         }
 
-        /* ONLY 22k */
         .share-count {
             font-weight: bold;
             color: #333;
@@ -167,9 +172,27 @@
         .facebook { background-color: #3b5998; }
         .whatsapp { background-color: #25d366; }
         .instagram { background-color: #E1306C; }
+
+        /* Ad Placeholder Styling */
+        .ad-placeholder {
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px dashed #ccc;
+            text-align: center;
+            color: #555;
+            font-size: 0.9em;
+        }
     </style>
 </head>
 <body>
+    
+    <!-- Ad Code Location 2: BODY (Where Ad Banners are often placed) -->
+    <div class="ad-placeholder">
+        <!-- REPLACE THIS WITH YOUR AD BANNER CODE -->
+        <div id="ad-banner-1">Your Ad Banner Code Here</div>
+        <!-- --------------------------------------- -->
+    </div>
+    
 
     <!-- Fireworks Canvas (Will be filled by JavaScript) -->
     <canvas id="fireworksCanvas"></canvas>
@@ -180,7 +203,8 @@
 
         <!-- Share Component -->
         <div class="share-component">
-            <div class="share-button-main">
+            <!-- Share Button (22k) - ID Added for Click Handler -->
+            <div class="share-button-main" id="mainShareButton">
                 <span class="share-icon">
                     <i class="fas fa-share-alt"></i> <!-- Share Icon Logo -->
                 </span>
@@ -196,14 +220,21 @@
                 <a href="#" id="share-whatsapp" class="social-link whatsapp" title="Share on WhatsApp">
                     <i class="fab fa-whatsapp"></i>
                 </a>
-                <!-- Instagram/Native Share: Icon changed back to Instagram -->
+                <!-- Instagram/Native Share -->
                 <a href="#" id="share-instagram" class="social-link instagram" title="Share via Native Apps (Instagram, Twitter, etc.)">
                     <i class="fab fa-instagram"></i> 
                 </a>
             </div>
         </div>
     </div>
-
+    
+    <!-- Ad Code Location 3: BODY (Another Ad Banner Location) -->
+    <div class="ad-placeholder">
+        <!-- REPLACE THIS WITH YOUR SECOND AD BANNER CODE -->
+        <div id="ad-banner-2">Your Second Ad Banner Code Here</div>
+        <!-- ------------------------------------------ -->
+    </div>
+    
     <script>
         /* JavaScript Functionality */
         
@@ -214,19 +245,16 @@
         
         // Helper function for copy to clipboard
         function copyToClipboard(text) {
-             // Create a temporary textarea element
             const textArea = document.createElement("textarea");
             textArea.value = text;
             textArea.style.position = "fixed"; 
-            textArea.style.opacity = 0; // Hide the textarea
+            textArea.style.opacity = 0; 
             document.body.appendChild(textArea);
             
-            // Select the content
             textArea.focus();
             textArea.select();
             
             try {
-                // Execute copy command
                 document.execCommand('copy');
                 document.body.removeChild(textArea);
                 return true;
@@ -236,7 +264,42 @@
             }
         }
 
-        // 1. Social Media Share Links Implementation (These use simple URL redirects and are reliable)
+        // Common Share Handler Function for 22k and Instagram buttons
+        async function handleNativeShare(e) {
+            e.preventDefault();
+            
+            const shareData = {
+                title: SHARE_TITLE,
+                text: SHARE_TEXT,
+                url: SHARE_URL 
+            };
+            
+            const fallbackMessage = `${SHARE_TITLE}\n${SHARE_TEXT}\n\nLink: ${SHARE_URL}`;
+
+            if (navigator.share) {
+                // Attempt to use native Web Share API
+                try {
+                    await navigator.share(shareData);
+                } catch (err) {
+                    // If native share fails or cancelled, try copy to clipboard
+                    if (copyToClipboard(fallbackMessage)) {
+                         alert('Native Share failed. Message and link copied to clipboard! Paste it into your favorite app.');
+                    } else {
+                         alert('Native Share failed. Please manually copy this link: ' + SHARE_URL);
+                    }
+                }
+            } else {
+                // Fallback for non-supporting browsers
+                if (copyToClipboard(fallbackMessage)) {
+                     alert('Native Share not supported here. Message and link copied to clipboard! Paste it into your favorite app.');
+                } else {
+                     alert('Native Share not supported. Please manually copy this link: ' + SHARE_URL);
+                }
+            }
+        }
+
+
+        // 1. Share Links Implementation 
 
         document.getElementById('share-facebook').addEventListener('click', (e) => {
             e.preventDefault();
@@ -251,40 +314,11 @@
             window.open(whatsappUrl, '_blank');
         });
 
-        // INSTAGRAM / NATIVE SHARE - IMPROVED WORKABILITY
-        document.getElementById('share-instagram').addEventListener('click', async (e) => {
-            e.preventDefault();
-            
-            const shareData = {
-                title: SHARE_TITLE,
-                text: SHARE_TEXT,
-                url: SHARE_URL 
-            };
-            
-            const fallbackMessage = `${SHARE_TITLE}\n${SHARE_TEXT}\n\nLink: ${SHARE_URL}`;
+        // Event Listener for the 22k Share Button
+        document.getElementById('mainShareButton').addEventListener('click', handleNativeShare); 
 
-
-            if (navigator.share) {
-                // Attempt to use native Web Share API
-                try {
-                    await navigator.share(shareData);
-                } catch (err) {
-                    // If native share fails or cancelled, try copy to clipboard
-                    if (copyToClipboard(fallbackMessage)) {
-                         alert('Native Share/Instagram failed. Message and link copied to clipboard! Paste it into Instagram or any other app.');
-                    } else {
-                         alert('Native Share failed. Please manually copy this link: ' + SHARE_URL);
-                    }
-                }
-            } else {
-                // Fallback for non-supporting browsers
-                if (copyToClipboard(fallbackMessage)) {
-                     alert('Native Share not supported here. Message and link copied to clipboard! Paste it into Instagram or any other app.');
-                } else {
-                     alert('Native Share not supported. Please manually copy this link: ' + SHARE_URL);
-                }
-            }
-        });
+        // Event Listener for the Instagram Share Button
+        document.getElementById('share-instagram').addEventListener('click', handleNativeShare);
 
 
         // 2. Simple Fireworks Effect (Canvas-based) - 4X Increase
@@ -321,7 +355,6 @@
                 ctx.save();
                 ctx.globalAlpha = this.alpha;
                 ctx.beginPath();
-                // Fix for arc drawing: use this.radius
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false); 
                 ctx.fillStyle = this.color;
                 ctx.fill();
@@ -388,15 +421,22 @@
         launchFireworks(20, 300);
 
     </script>
+    
+    <!-- Ad Code Location 4: END (Right before closing </body>/</html>) -->
+    <!-- REPLACE THIS WITH YOUR THIRD AD BANNER/FOOTER CODE -->
+    <div class="ad-placeholder">
+        <div id="ad-banner-3">Your Final Ad Banner Code Here</div>
+    </div>
+    <!-- ------------------------------------------------------------- -->
 </body>
+</html>
     <script type="text/javascript">
 	atOptions = {
-		'key' : '8b79f7c2e9d6f490116306c5ace91e44',
+		'key' : '1c3518555110883c46ac42676014ce93',
 		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
+		'height' : 60,
+		'width' : 468,
 		'params' : {}
 	};
 </script>
-<script type="text/javascript" src="//www.highperformanceformat.com/8b79f7c2e9d6f490116306c5ace91e44/invoke.js"></script>
-</html>
+<script type="text/javascript" src="//www.highperformanceformat.com/1c3518555110883c46ac42676014ce93/invoke.js"></script>
